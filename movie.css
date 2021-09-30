@@ -1,0 +1,89 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    padding: 0;
+    background-image: url("background.png");
+}
+header>div{
+    max-width: 960px;
+    margin: 0 auto;
+}
+header{
+    background-image: url("bannerbg.png");
+    background-repeat: repeat-x;
+}
+#main-section{
+    max-width: 960px;
+    margin: 0 auto;
+}
+#main-section>div{
+    border: solid grey 1px;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #A2B964;
+}
+#main-section>h1{
+    text-align: center;
+}
+#main-section>div>aside{
+    width:25%;
+    float: right;
+    font-size: 13px;
+}
+#main-body{
+    width:75%;
+}
+#main-body>.main-body-header{
+    background-image: url("rbg.png");
+    background-repeat: repeat-x;
+    font-size: 50px;
+    color: Red;
+    font-weight: bold;
+}
+#all-comments{
+    column-count: 2;
+    background-image: url("background.png");
+    overflow: auto;
+}
+#main-body>div>img{
+    vertical-align: middle;
+}
+.user-comment{
+    padding:10px;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+.user-comment::after{
+    clear: both;
+}
+.user-quote{
+    border:solid grey 1px;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #E8DC9B;
+}
+.critic{
+    font-size: 13px;
+    color: grey;
+}
+.user-comment img{
+    float: left;
+    vertical-align: top;
+}
+#movie-info{
+    padding :0 10px;
+}
+ul#links{
+    list-style-type: none;
+    padding:0;
+}
+P#pagination{
+    text-align: center;
+}
+div#validation{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
