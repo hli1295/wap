@@ -1,0 +1,45 @@
+.navbar {
+    background-color: darkolivegreen;
+    margin-bottom: 0px;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: black;
+}
+
+#head {
+    background-color: lightblue;
+    margin: 0px;
+    padding: 2px;
+}
+
+#col1 {
+    background-color: rgb(165, 164, 164);
+    height: 300px;
+}
+
+#col3 {
+    background-color: rgb(211, 211, 211);
+    height: 300px;
+}
+
+#col2 {
+    background-color: rgb(187, 187, 187);
+    height: 300px;
+}
+
+footer {
+    background-color: rgb(50, 83, 68);
+    padding: 10px;
+    color:aliceblue;
+}
+
+#menus {
+    background-color: rgb(50, 83, 68);
+    padding: 10px;
+    color:aliceblue;
+}
+#menus>div {
+    
+    border-right: 1px solid black;
+}
