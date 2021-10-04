@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<title>ASCIImation</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="./ascii.css" type="text/css" rel="stylesheet">
+		<script src="./animations.js" ></script>
+		<script src="./ascii.js" ></script>
+    </head>
+	
+    <body>
+        <header>CS472 ASCII Animation Viewer</header>
+		<div class="container">
+			<textarea id="text-area" class="disable-on-start" cols="80" rows="20"></textarea>
+			<fieldset>
+				<legend>Play Controls:</legend>
+				<button id="start" class="disable-on-start">Start</button>
+				<button disabled="disabled" id="stop" class="disable-on-stop">Stop</button>
+			</fieldset>
+
+			<fieldset>
+				<legend>Animation:</legend>
+				<select id="animation" class="disable-on-start">
+					<option selected="selected" value="Blank">Blank</option>
+					<option value="Exercise">Exercise</option>
+					<option value="Juggler">Juggler</option>
+					<option value="Bike">Bike</option>
+					<option value="Dive">Dive</option>
+				</select>
+			</fieldset>
+			<fieldset>
+				<legend>Size:</legend>
+				<select id="fontsize">
+					<option value="7">Tiny</option>                                              
+					<option value="10">Small</option>                        
+					<option value="12" selected="selected">Medium</option>                                           
+					<option value="16">Large</option>                        
+					<option value="24">Extra Large</option>                       
+					<option value="32">XXL</option>                        
+				</select>
+			</fieldset>
+			<fieldset>
+				<legend>Speed:</legend>
+				<label><input id="turbo" type="checkbox">Turbo</label>
+			</fieldset>
+		</div>
+        <div id="validation">
+			<a href="https://validator.w3.org/nu/?doc=https://hli1295.github.io/wap/tmnt.html"><img src="https://manalabs.org/img/w3c-html.png" alt="Valid HTML5" /></a> <br />
+			<a href="http://jigsaw.w3.org/css-validator/validator?uri=https://hli1295.github.io/wap/movie.css"><img src="https://manalabs.org/img/w3c-css.png" alt="Valid CSS" /></a>
+		</div>
+    
+
+</body></html>
