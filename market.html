@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WebForm</title>
+        <style>
+            body{
+                padding: 0;
+                margin: 0;
+            }
+            nav{
+                list-style-type: none;
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+                background-color: deepskyblue;
+                color: white;
+                align-items: center;
+                padding: 4px 10px;
+                grid-column-gap: 10px;
+            }
+            nav :last-child{
+                text-align: right;
+            }
+            nav :first-child, nav :nth-child(2){
+                border-right: solid 1px white;
+            }
+            nav button{
+                padding: 10px;
+                border-width: 0;
+                border-radius: 4px;
+            }
+            form{
+                display: grid;
+                grid-row-gap: 10px;
+                margin: 10px;
+            }
+            label{
+                font-size: 30px;
+            }
+            input[type="text"],input[type="password"]{
+                font-size: 26px;
+                padding: 5px 10px;
+                border-radius: 4px;
+                border:solid 1px grey;
+            }
+            input[type="submit"]{
+                font-size: 26px;
+                padding: 10px;
+                border-radius: 4px;
+                background-color: dodgerblue;
+                border-width: 0;
+                color: white;
+            }
+            #main-container{
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                padding:0 50px;
+            }
+            h1{
+                padding: 0 50px;
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <p>MUM Golden Dome Market:::SRM System</p>
+            <p>Products</p>
+            <p>Supplier</p>
+            <p>Hello <button>Sign Out</button></p>
+        </nav>
+        <h1>New Product Form</h1>
+        <div id="main-container">
+            <div id="left-container">
+                <form>
+                    <label>Phone Number</label>
+                    <input type="text" placeholder="Enter email">
+                    <label>Name</label>
+                    <input type="text" >
+                    <label>Unit Price</label>
+                    <input type="text" placeholder="0.0">
+                </form>
+            </div>
+            <div id="right-container">
+                <form>
+                    <label>Quantity in stock</label>
+                    <input type="text" placeholder="Enter email">
+                    <label>Supplier:</label>
+                    <input type="text" placeholder="Select supplier">
+                    <label>Date Supplied:</label>
+                    <input type="text" placeholder="yyyy-mm-dd">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
