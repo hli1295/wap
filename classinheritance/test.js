@@ -1,96 +1,216 @@
-mocha.setup("bdd");
-let assert = chai.assert;
-describe("Account" ,function(){
-    it("a new account must have zero balance", function(){
-        assert.equal(new Account("1122").getBalance(),0.0);
-    });
-});
-describe("Deposit", function(){
-    it("throws an error when we provide negative number", function(){
-        let account = new Account("111");
-        assert.throw(()=>account.deposit(-1), Error);
-    });
-    it("when we provide the right amount",function(){
-        let account = new Account("111");
+
+// Account Testing
+
+describe("Deposite", function () {
+    let account;
+    before(function(){
+        account = new Account(1);
         account.deposit(100);
-        assert.equal(account.getBalance(),100);
+
     });
-});
-describe("Withdrawal", function(){
-    it("throws error if we provide negative number",function(){
-        let account = new Account("111");
-        assert.throw(()=>account.withdraw(-100), Error);
-    });
-    it("throws error if we give more amount than have",function(){
-        let account = new Account("111");
-        account.deposit(100);
-        if(account.getBalance<account.withdraw(100)){
-            assert.throw(Error);
-        }
-    });
-});
-describe("SavingsAccount",function(){
-    it("must throw error if the balance is zero",function(){
-        let account=new SavingsAccount("1234",50);
-        assert.throw(()=>account.addInterest(),Error);
-    })
-    it("must add the right amount of interest",function(){
-        let account=new SavingsAccount("1234",50);
-        account.deposit(100);
-        account.addInterest();
-        assert.equal(account.getBalance(),150);
-    });
-});
-describe("CheckingAccount",function(){
-    it("must throw error if provided negative amount",function(){
-        let account=new CheckingAccount("100",120);
-        assert.throw(()=>account.withdraw(-10),Error);
-    });
-    it("must allow up to overdraft amount",function(){
-        let account=new CheckingAccount("120",100);
-        account.withdraw(100);
-        assert.equal(-100,account.getBalance());
-    });
-    it("must throw error if withdrawal is below overDraft",function(){
-        let account=new CheckingAccount("100",120);
-        assert.throw(()=>account.withdraw(121),Error);
+
+
+    it("deposites money to account",
+        function () {
+            assert.equal(100, account.getBalance());
     });
 });
 
-describe("Bank",function(){
-    it("must return empty array if nothing is added",function(){
-        let bank=new Bank();
-        assert.equal(0,bank.total());
+describe("Withdraw", function () {
+    let account;
+    before(function(){
+        account = new Account(1);
+        account.deposit(100);
+        account.withdraw(50);
+
     });
-    it("must add and close account",function(){
-        let bank=new Bank();
-        bank.addAccount("123");
-        assert.equal(1,bank.total());
-        bank.closeAccount("123");
-        assert.equal(0,bank.total());
-    });
-    it("must generate report",function(){
-        let bank=new Bank();
-        bank.addAccount("1");
-        bank.addAccount("2");
-        bank.addAccount("3");
-        bank.addAccount("4");
-        bank.addAccount("5");
-        bank.addAccount("6");
-        assert.equal("1\n2\n3\n4\n5\n6",bank.accountReport());
+
+
+    it("withdraw money from account",
+        function () {
+            assert.equal(50, account.getBalance());
     });
 });
-describe("end of month",function(){
-    it("normal account must return empty string",function(){
-        let acc=new Account("123");
-        assert.equal("",acc.endOfMonth());
+
+describe("Illegal withdraw", function () {
+    let account;
+    let withdrawFunc;
+    before(function(){
+        account = new Account(1);
+        account.deposit(100);
+        
+        withdrawFunc = function(){
+            account.withdraw(150);
+        }
     });
-    it("checking account with negative balance must start with warning",function(){
-        let acc=new CheckingAccount("123",10);
-        acc.withdraw(10);
-        assert.equal(true,acc.endOfMonth().startsWith("Warning"));
-    })
+
+
+    it("warning for withdraw from account with insufficent balance",
+        function () {
+            assert.throws(withdrawFunc, Error, "Insufficient funds");
+    });
 });
-window.onload = function(){
-    mocha.run();
-}
+
+
+// SavingAccount Testing
+
+describe("Create saving Account", function () {
+    let account;
+    before(function(){
+        account = new SavingsAccount(1, 3);
+        account.deposit(100);
+
+    });
+
+
+    it("creates new saving account",
+        function () {
+            assert.equal(1, account.getNumber());
+    });
+});
+
+
+describe("Add interest into current balance", function () {
+    let account;
+    before(function(){
+        account = new SavingsAccount(1, 3);
+        account.deposit(100);
+        account.addInterest();
+    });
+
+
+    it("add interest to current balance",
+        function () {
+            assert.equal(103, account.getBalance());
+    });
+});
+
+
+// checking accounts
+
+describe("Create checking Account", function () {
+    let account;
+    before(function(){
+        account = new CheckingAccount(1, 100);
+        // account.deposit(100);
+
+    });
+
+
+    it("creates new checking account",
+        function () {
+            assert.equal(1, account.getNumber());
+    });
+});
+
+
+describe("Withdrawal with amount more than overdraft", function () {
+    let account;
+    let withdrawFunc;
+    before(function(){
+        account = new CheckingAccount(1, 100);
+        account.deposit(100);
+
+        withdrawFunc = function(){
+            account.withdraw(250);
+        }
+    });
+
+
+    it("checks illegal withdraw from checking account",
+        function () {
+            assert.throws(withdrawFunc, Error, "Overdraft Limit exceded");
+    });
+});
+
+
+// Bank
+
+describe("Add account for a bank", function () {
+    let bankA;
+    before(function(){
+        bankA = new Bank();
+        bankA.addAccount();
+    });
+
+
+    it("adds account to a bank",
+        function () {
+            assert.equal(1000, bankA.getAccounts()[0].getNumber());
+    });
+});
+
+
+describe("Add saving account for a bank", function () {
+    let bankA;
+    let account;
+    before(function(){
+        bankA = new Bank();
+        bankA.addSavingAccount(4);
+    });
+
+
+    it("Adds saving account to a bank",
+        function () {
+            assert.equal(1001, bankA.getAccounts()[0].getNumber());
+    });
+});
+
+
+describe("Add cheking account for a bank", function () {
+    let bankA;
+    let account;
+    before(function(){
+        bankA = new Bank();
+        bankA.addAccount();
+    });
+
+
+    it("add checking account to a bank",
+        function () {
+            assert.equal(1002, bankA.getAccounts()[0].getNumber());
+    });
+});
+
+
+describe("Close an account", function () {
+    let bankA;
+    let account;
+    before(function(){
+        bankA = new Bank();
+        bankA.addAccount();
+        bankA.closeAccount(1003);
+    });
+
+
+    it("close an account",
+        function () {
+            assert.equal(0, bankA.getAccounts().length);
+    });
+});
+
+
+describe("End of month report", function () {
+    let bankA;
+    before(function(){
+        bankA = new Bank();
+        bankA.addAccount();
+        bankA.addSavingAccount(4);
+        bankA.addCheckingAccount(200);
+
+        bankA.getAccounts().forEach((acc) => {
+            acc.deposit(100);
+
+        });
+
+        bankA.getAccounts()[2].withdraw(150);
+    });
+
+
+    it("end of month report for accounts in a bank",
+        function () {
+            assert.equal("\nInterest added SavingAccount 1005: balance: 100 interest: 4\n" +
+             "Warning, low balance CheckingAccount 1006: balance: -50 overdraft limit: 200\n"
+            , bankA.endOfMonth());
+    });
+});

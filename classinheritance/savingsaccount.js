@@ -1,26 +1,33 @@
-"use strict";
 class SavingsAccount extends Account{
-    constructor(number,interest){
+    constructor(number, interest){
         super(number);
-        this.interest = interest;
+        this._interest = interest;
     }
-    set interest(value){
-        if(value<0)
-         throw new Error("Negative Interest");
-         this._interest = value;
-    }
-    get interest(){
+
+    getInterest(){
         return this._interest;
     }
+
+    setInterest(rate){
+        this._interest = rate;
+    }
+
     addInterest(){
-        return this.deposit(this.getBalance() * this.interest/100);
+        let amount = this.getBalance() * (this.getInterest() / 100);
+        this.deposit(amount);
     }
-    toString(){
-        return `SavingAccount   ${this.getNumber()}  Balance : ${this.getBalance()} interest:${this._interest}`;
-    }
+
     endOfMonth(){
-        let prev=this.getBalance();
+        let interestAdded = this.getBalance() * (this.getInterest() / 100);
+        
+        let result = 'Interest added SavingAccount ' + this.getNumber() + ': balance: ' + this.getBalance() + ' interest: ' + interestAdded;
+
         this.addInterest();
-        return `Interest added ${this.getBalance()-prev} ${this.toString()}`;
+
+        return result;
+    }
+
+    toString() {
+        return "Saving Account " + this.getNumber() + ": balance " + this.getBalance();
     }
 }

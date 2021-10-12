@@ -1,44 +1,65 @@
-"use strict";
 class Bank{
     constructor(){
-        this._accounts=[];
-    }
-    getAccount(idx){
-        return this._accounts[idx];
-    }
-    total(){
-        return this._accounts.length;
-    }
-    addAccount(number){
-        this._accounts.push(new Account(number));
-        return this._accounts.length;
-    }
-    addSavingsAccount(number,interest){
-        this._accounts.push(new SavingsAccount(number,interest));
-        return this._accounts.length;
-    }
-    addCheckingsAccount(number,overdraft){
-        this._accounts.push(new CheckingAccount(number,overdraft));
-        return this._accounts.length;
-    }
-    closeAccount(number){
-        for(let i in this._accounts){
-            if(this._accounts[i].getNumber()===number){
-                this._accounts.splice(i);
-                break;
-            }
-        }
-    }
-    accountReport(){
-        return this._accounts.reduce((acc,ele,idx,array)=>{
-            return acc+Bank.nextNumber(this,idx)+"\n";
-        },"").trim();
-    }
-    endOfMonth(){
-        return this._accounts.reduce((acc,el)=>acc+el.endOfMonth()+"\n","");
-    }
-    static nextNumber(bank,idx){
-        return bank.getAccount(idx).getNumber();
+        this._accounts = [];
     }
 
+    static nextNumber = 1000;
+
+    getAccounts(){
+        return this._accounts;
+    }
+
+    addAccount(){
+        let account = new Account(Bank.nextNumber);
+        this._accounts.push(account);
+        Bank.nextNumber++;
+        
+        return account;
+    }
+
+    addSavingAccount(interest){
+        let account = new SavingsAccount(Bank.nextNumber, interest);
+        this._accounts.push(account);
+        Bank.nextNumber++;
+
+        return account;
+    }
+
+    addCheckingAccount(overdraftLimit){
+        let account = new CheckingAccount(Bank.nextNumber, overdraftLimit);
+        this._accounts.push(account);
+        Bank.nextNumber++;
+
+        return account;
+    }
+
+
+    closeAccount(number){
+        this._accounts.forEach(acc => {
+            if(acc.getNumber() === number){
+                let index = this._accounts.indexOf(acc);
+                this.getAccounts().splice(index, 1);
+            }
+        });
+    }
+
+
+    accountReport(){
+        let report = '';
+        this.getAccounts().forEach((acc) => {
+            report += acc.toString() + "\n";
+        });
+
+        return report;
+    }
+
+
+    endOfMonth(){
+        let report = '';
+        this.getAccounts().forEach((acc) => {
+            report += acc.endOfMonth() + "\n";
+        });
+
+        return report;
+    }
 }
