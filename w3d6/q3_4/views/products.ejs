@@ -1,0 +1,20 @@
+<%- include('./head.ejs') %>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+        </tr>
+        <% products.map((product) => { -%>
+            <tr>
+                <td><%= product.id %></td>
+                <td><%= product.name %></td>
+                <td><%= product.description %></td>
+                <td><%= product.price %></td>
+                <td><a href="/addToCart"><button>Add to cart</button></a></td>
+            </tr>
+            <%
+        }) %>
+    </table>
+<%- include('./end.ejs') %>
