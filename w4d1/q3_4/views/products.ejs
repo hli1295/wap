@@ -1,0 +1,29 @@
+<%- include('./head.ejs') %>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+        </tr>
+        <% products.map((product) => { -%>
+            <tr>
+                <td><%= product.id %></td>
+                <td><%= product.name %></td>
+                <td><%= product.description %></td>
+                <td><%= product.price %></td>
+                <td>
+                    <form action="/addToCart" method="post">
+                        <input type="text" name="name" value="<%= product.name %>" /> 
+                        <input type="text" name="price"  value="<%= product.price %>" />
+                        <input type="submit" value="Add to cart"/>
+                    </form>
+                </td>
+            </tr>
+            <%
+        }) %>
+    </table>
+    <div>
+        <a href="/cart"><button>show cart</button></a>
+    </div>
+<%- include('./end.ejs') %>
