@@ -1,0 +1,28 @@
+<%- include('./head.ejs') %>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+        </tr>
+        <% products.map((product) => { %>
+            <tr>
+                <td><%= product.id %></td>
+                <td id="name<%= product.id%>"><%= product.name %></td>
+                <td><%= product.description %></td>
+                <td id="price<%= product.id%>"><%= product.price %></td>
+                <td>
+                    <button class="submitBtn" id="<%= product.id %>"/>Add to cart</button>
+                </td>
+            </tr>
+            <%
+        }) %>
+    </table>
+    <div id="msg">
+
+    </div>
+    <div>
+        <a href="/cart"><button>show cart</button></a>
+    </div>
+<%- include('./end.ejs') %>
